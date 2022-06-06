@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./styles/styles.css">
+  <link rel="stylesheet" href="./styles/reset.css">
+  <title>Tic Tac Toc</title>
+</head>
+
+<body>
+  <!-- LEFT CONTAINER -->
+  <section class="left-container">
+    <div class="center-box center-left-box">
+      <div class="player-box">
+        <input class="input-player input-player-1" placeholder="Jogador 1">
+        <div class="wrapper-field-player-2">
+          <input class="input-player input-player-2" placeholder="Jogador 2">
+          <div class="switcher switcher-bot">
+            <div class="switcher-ball"></div>
+          </div>
+        </div>
+      </div>
+      <div class="match-type-box">
+        <h2 class="match-type-title">Tipo de Partida</h2>
+        <div class="align-match-type-modes">
+          <span>Melhor de 3</span>
+          <div class="switcher switcher-MD">
+            <div class="switcher-ball"></div>
+          </div>
+          <span>Melhor de 5</span>
+        </div>
+        <button class="play-button">Jogar</button>
+      </div>
+      <div class="match-history">
+        <h2 class="match-history-title">Histórico de partidas</h2>
+        <div class="match-history-list">
+        </div>
+      </div>
+      <button class="restart-button">Reiniciar</button>
+    </div>
+  </section>
+  <!-- CENTER CONTAINER -->
+  <section class="center-container">
+    <div class="score-box">
+      <h1 class="main-title">Placar</h1>
+      <div class="align-score-box">
+        <span class="score score-player-1">00</span>
+        <span class="title-winner">Jogador 1</span>
+        <span class="score score-player-2">00</span>
+      </div>
+    </div>
+    <div class="battlefield">
+      <div class="board-item  board-item-0"></div>
+      <div class="board-item  board-item-1"></div>
+      <div class="board-item  board-item-2"></div>
+      <div class="board-item  board-item-3"></div>
+      <div class="board-item  board-item-4"></div>
+      <div class="board-item  board-item-5"></div>
+      <div class="board-item  board-item-6"></div>
+      <div class="board-item  board-item-7"></div>
+      <div class="board-item  board-item-8"></div>
+    </div>
+  </section>
+  <!-- RIGHT CONTAINER -->
+  <section class="right-container">
+    <h2 class="history-move-title">Histórico de jogadas</h2>
+    <div class="history-move-box">
+    </div>
+    </div>
+  </section>
+  <script src="./scripts/index.js"></script>
+</body>
+</html>
