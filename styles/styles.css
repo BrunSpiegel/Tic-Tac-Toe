@@ -75,6 +75,7 @@ body {
   width: 24px;
   height: 24px;
   border-radius: 50px;
+  transition: 0.7s;
 }
 
 .switcher.active > .switcher-ball {
