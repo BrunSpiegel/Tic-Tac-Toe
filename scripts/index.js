@@ -134,6 +134,10 @@ function verifyGame() {
   }
 }
 
+function resetGetSenery() {
+  $matchHistoryList.textContent = ""
+}
+
 function resetWinnerName() {
   $winnerName.textContent = ''
 }
@@ -259,7 +263,7 @@ $switcherBestOf.addEventListener('click', function () {
 })
 
 $startButton.addEventListener('click', function () {
-  $startButton.classList.toggle('active')
+  $startButton.classList.toggle('start-active')
 
   gameButtonStart = gameButtonStart === false ? true : false
 
@@ -270,4 +274,5 @@ $restartButton.addEventListener('click', function () {
   resetScoreboard()
   resetBattlefield()
   resetWinnerName()
+  resetGetSenery()
 })
