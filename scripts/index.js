@@ -266,11 +266,7 @@ $switcherBestOf.addEventListener('click', function () {
 $startButton.addEventListener('click', function () {
   $startButton.classList.toggle('active')
 
-  if (gameButtonStart === false) {
-    gameButtonStart = true 
-  } else {
-    gameButtonStart = false
-  }
+  gameButtonStart = gameButtonStart === false ? true : false
 })
 
 $restartButton.addEventListener('click', function () {
