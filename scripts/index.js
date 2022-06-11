@@ -134,12 +134,7 @@ function verifyGame() {
   }
 }
 
-function resetNamePlayer() {
-  $playerField1.value = ''
-  $playerField2.value = ''
-}
-
-function reserWinnerName() {
+function resetWinnerName() {
   $winnerName.textContent = ''
 }
 
@@ -267,13 +262,12 @@ $startButton.addEventListener('click', function () {
   $startButton.classList.toggle('active')
 
   gameButtonStart = gameButtonStart === false ? true : false
+
 })
 
 $restartButton.addEventListener('click', function () {
   resetHistoryList()
   resetScoreboard()
   resetBattlefield()
-  resetNamePlayer()
-  reserWinnerName()
-  window.location.reload()
+  resetWinnerName()
 })

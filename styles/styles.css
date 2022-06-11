@@ -114,16 +114,8 @@ body {
   box-shadow: 0 4px 20px -4px #000000;
 }
 
-.play-button:hover {
-  background-color: #3cde8e;
-}
-
 .active {
   background-color: #3cde8e;
-}
-
-.active:hover {
-  background-color: #A9A9A9;
 }
 
 .match-history-title {
