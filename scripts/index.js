@@ -8,11 +8,14 @@ const $historyMoveList = document.querySelector('.history-move-box')
 const $matchHistoryList = document.querySelector('.match-history-list')
 const $switcherBOT = document.querySelector('.switcher-bot')
 const $switcherBestOf = document.querySelector('.switcher-MD')
+const $startButton = document.querySelector('.start')
+const $restartButton = document.querySelector('.restart')
 
 let = currentMove = 'X'
 let scorePlayer1 = 0
 let scorePlayer2 = 0
 let gameStart = true
+let gameButtonStart = false
 let botActive = false
 let bestOf = 3
 
@@ -131,6 +134,15 @@ function verifyGame() {
   }
 }
 
+function resetNamePlayer() {
+  $playerField1.value = ''
+  $playerField2.value = ''
+}
+
+function reserWinnerName() {
+  $winnerName.textContent = ''
+}
+
 function resetHistoryList() {
   $historyMoveList.innerHTML = ''
 }
@@ -147,14 +159,14 @@ function resetBattlefield() {
 }
 
 function toggleBestOf() {
-  bestOf = bestOf === 3 ? 5 : 3 
+  bestOf = bestOf === 3 ? 5 : 3
 }
 
 function bot() {
   const randomNumber = Math.random() * 9
   const index = Math.floor(randomNumber)
   const $boardItem = $boardList[index]
-  
+
   const game = verifyGame()
 
   if ($boardItem.textContent != '' && game != 'draw') return bot()
@@ -163,53 +175,57 @@ function bot() {
 }
 
 function move(boardIndex, type) {
-  const $boardItem = $boardList[boardIndex]
+  if (gameButtonStart === true) {
+    const $boardItem = $boardList[boardIndex]
 
-  if (!gameStart) return
- 
-  if ($boardItem.innerHTML != '') return
+    if (!gameStart) return
 
-  $boardItem.innerHTML = currentMove
+    if ($boardItem.innerHTML != '') return
 
-  const gameResult = verifyGame()
+    $boardItem.innerHTML = currentMove
 
-  const scenery = getSenery()
+    const gameResult = verifyGame()
 
-  const playerName = currentMove === 'X' ? $playerField1.value : $playerField2.value
+    const scenery = getSenery()
 
-  if (gameResult === 'X' || gameResult === 'O') {
-    gameStart = false
-    addPoint(gameResult)
-    printScore()
-    printWinnerName(playerName)
-    setTimeout(resetBattlefield, 1000)
-    setTimeout(resetHistoryList, 1000)
-    printMatchHistory(playerName, scenery)
-    setTimeout(function() {
-      gameStart = true
-    }, 1000)
-  }
+    const playerName = currentMove === 'X' ? $playerField1.value : $playerField2.value
 
-  if (gameResult === 'draw') {
-    gameStart = false
-    setTimeout(resetBattlefield, 1000)
-    setTimeout(resetHistoryList, 1000)
-    printMatchHistory('Empate', scenery)
-    setTimeout(function() {
-      gameStart = true
-    }, 1000)
-  }
+    if (gameResult === 'X' || gameResult === 'O') {
+      gameStart = false
+      addPoint(gameResult)
+      printScore()
+      printWinnerName(playerName)
+      setTimeout(resetBattlefield, 1000)
+      setTimeout(resetHistoryList, 1000)
+      printMatchHistory(playerName, scenery)
+      setTimeout(function () {
+        gameStart = true
+        if (botActive) currentMove = 'X'
+      }, 1000)
+    }
 
-  const bestOfResult = verifyBestOf()
+    if (gameResult === 'draw') {
+      gameStart = false
+      setTimeout(resetBattlefield, 1000)
+      setTimeout(resetHistoryList, 1000)
+      printMatchHistory('Empate', scenery)
+      setTimeout(function () {
+        gameStart = true
+        if (botActive) currentMove = 'X'
+      }, 1000)
+    }
 
-  printMoveList(currentMove, playerName, boardIndex)
-  toggleMove()
-  if (type === 'user' && botActive) bot()
-  if (bestOfResult !== undefined) {
-    resetScoreboard()
-    scorePlayer1 = 0
-    scorePlayer2 = 0
-    alert(bestOfResult)
+    const bestOfResult = verifyBestOf()
+
+    printMoveList(currentMove, playerName, boardIndex)
+    toggleMove()
+    if (type === 'user' && botActive) bot()
+    if (bestOfResult !== undefined) {
+      resetScoreboard()
+      scorePlayer1 = 0
+      scorePlayer2 = 0
+      alert(bestOfResult)
+    }
   }
 }
 
@@ -235,14 +251,33 @@ function addEventListener() {
 
 addEventListener()
 
-$switcherBOT.addEventListener('click', function() {
+$switcherBOT.addEventListener('click', function () {
   $switcherBOT.classList.toggle('active')
   botActive = !botActive
   $playerField2.value = botActive ? 'BOT' : ''
   $playerField2.disabled = !$playerField2.disabled
 })
 
-$switcherBestOf.addEventListener('click', function() {
+$switcherBestOf.addEventListener('click', function () {
   $switcherBestOf.classList.toggle('active')
   toggleBestOf()
+})
+
+$startButton.addEventListener('click', function () {
+  $startButton.classList.toggle('active')
+
+  if (gameButtonStart === false) {
+    gameButtonStart = true 
+  } else {
+    gameButtonStart = false
+  }
+})
+
+$restartButton.addEventListener('click', function () {
+  resetHistoryList()
+  resetScoreboard()
+  resetBattlefield()
+  resetNamePlayer()
+  reserWinnerName()
+  window.location.reload()
 })

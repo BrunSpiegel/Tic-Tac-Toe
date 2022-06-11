@@ -101,7 +101,7 @@ body {
 }
 
 .play-button {
-  background-color: #45f391;
+  background-color: #A9A9A9;
   border: transparent;
   width: 100%;
   height: 54px;
@@ -116,6 +116,14 @@ body {
 
 .play-button:hover {
   background-color: #3cde8e;
+}
+
+.active {
+  background-color: #3cde8e;
+}
+
+.active:hover {
+  background-color: #A9A9A9;
 }
 
 .match-history-title {
