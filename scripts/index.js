@@ -19,6 +19,8 @@ let gameButtonStart = false
 let botActive = false
 let bestOf = 3
 
+const moveSenery = []
+
 const winConditions = [
   [0, 1, 2],
   [3, 4, 5],
@@ -29,6 +31,18 @@ const winConditions = [
   [0, 4, 8],
   [2, 4, 6],
 ]
+
+function addMoveSenery() {
+ const scenery =  getSenery()
+
+ moveSenery.push(scenery)
+}
+
+function printBoardByScenery(scenery) {
+  for (let index = 0; index < scenery.length; index++) {
+    $boardList[index].textContent = scenery[index]
+  }
+}
 
 function printMoveList(move, playerName, boardIndex) {
   const dictionaryIndexBoard = [
@@ -51,6 +65,18 @@ function printMoveList(move, playerName, boardIndex) {
       <p class="moves-paragraph">${dictionaryIndexBoard[boardIndex]} Campo</p>
     </div>
   </div>`
+
+  const $historyMoveItems = document.querySelectorAll('.history-moves')
+
+  for(let index = 0; index < $historyMoveItems.length; index++) {
+    const $moveItem = $historyMoveItems[index]
+
+    $moveItem.addEventListener('click', function() {
+      const currentScenery = moveSenery[index]
+
+      printBoardByScenery(currentScenery)
+    })
+  }
 }
 
 function toggleMove() {
@@ -218,6 +244,7 @@ function move(boardIndex, type) {
 
     printMoveList(currentMove, playerName, boardIndex)
     toggleMove()
+    addMoveSenery()
     if (type === 'user' && botActive) bot()
     if (bestOfResult !== undefined) {
       resetScoreboard()
