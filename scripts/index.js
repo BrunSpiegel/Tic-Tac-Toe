@@ -222,9 +222,10 @@ const move = (boardIndex, type) => {
       setTimeout(resetBattlefield, 1000)
       setTimeout(resetHistoryList, 1000)
       printMatchHistory(playerName, scenery)
-      setTimeout(function () {
+      setTimeout(() => {
         gameStart = true
-        if (botActive) currentMove = 'X'
+        if (botActive)
+          currentMove = 'X'
       }, 1000)
     }
 
@@ -233,9 +234,10 @@ const move = (boardIndex, type) => {
       setTimeout(resetBattlefield, 1000)
       setTimeout(resetHistoryList, 1000)
       printMatchHistory('Empate', scenery)
-      setTimeout(function () {
+      setTimeout(() => {
         gameStart = true
-        if (botActive) currentMove = 'X'
+        if (botActive)
+          currentMove = 'X'
       }, 1000)
     }
 
