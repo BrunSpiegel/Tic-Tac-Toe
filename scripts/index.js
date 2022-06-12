@@ -32,19 +32,19 @@ const winConditions = [
   [2, 4, 6],
 ]
 
-function addMoveSenery() {
- const scenery =  getSenery()
+const addMoveSenery = () => {
+  const scenery =  getSenery()
 
  moveSenery.push(scenery)
 }
 
-function printBoardByScenery(scenery) {
+const printBoardByScenery = (scenery) => {
   for (let index = 0; index < scenery.length; index++) {
     $boardList[index].textContent = scenery[index]
   }
 }
 
-function printMoveList(move, playerName, boardIndex) {
+const printMoveList = (move, playerName, boardIndex) => {
   const dictionaryIndexBoard = [
     'Primeiro',
     'Segundo',
@@ -79,26 +79,25 @@ function printMoveList(move, playerName, boardIndex) {
   }
 }
 
-function toggleMove() {
+const toggleMove = () => {
   currentMove = currentMove === 'X' ? 'O' : 'X'
 }
 
-function printWinnerName(winnerName) {
+const printWinnerName = (winnerName) => {
   $winnerName.textContent = winnerName
 }
 
-function getSenery() {
-  const scenery = []
-
-  for (const $board of $boardList) {
+const getSenery = () => {
+  const scenery = Array.from($boardList).map(($board) => {
     const move = $board.textContent
-    scenery.push(move)
-  }
+
+    return move
+  })
 
   return scenery
 }
 
-function verifyBestOf() {
+const verifyBestOf = () => {
   if (scorePlayer1 === 2 && bestOf === 3) {
     return 'X'
   }
@@ -116,7 +115,7 @@ function verifyBestOf() {
   }
 }
 
-function printMatchHistory(winner, scenery) {
+const printMatchHistory = (winner, scenery) => {
   let miniBoardScenery = ''
 
   for (const move of scenery) {
@@ -136,7 +135,7 @@ function printMatchHistory(winner, scenery) {
   </div>`
 }
 
-function verifyGame() {
+const verifyGame = () => {
   let filledFields = 0
 
   for (const condition of winConditions) {
@@ -153,41 +152,41 @@ function verifyGame() {
     }
   }
 
-  for (const $field of $boardList) {
+  $boardList.forEach(($field) => {
     if ($field.innerHTML != '') filledFields++
+  })
 
-    if (filledFields === 9) return 'draw'
-  }
+  if (filledFields === 9) return 'draw'
 }
 
-function resetGetSenery() {
+const resetGetSenery = () => {
   $matchHistoryList.textContent = ""
 }
 
-function resetWinnerName() {
+const resetWinnerName = () => {
   $winnerName.textContent = ''
 }
 
-function resetHistoryList() {
+const resetHistoryList = () => {
   $historyMoveList.innerHTML = ''
 }
 
-function resetScoreboard() {
+const resetScoreboard = () => {
   $score1.textContent = '00'
   $score2.textContent = '00'
 }
 
-function resetBattlefield() {
+const resetBattlefield = () => {
   for (const $boardItem of $boardList) {
     $boardItem.innerHTML = ''
   }
 }
 
-function toggleBestOf() {
+const toggleBestOf = () => {
   bestOf = bestOf === 3 ? 5 : 3
 }
 
-function bot() {
+const bot = () => {
   const randomNumber = Math.random() * 9
   const index = Math.floor(randomNumber)
   const $boardItem = $boardList[index]
@@ -199,7 +198,7 @@ function bot() {
   move(index, 'bot')
 }
 
-function move(boardIndex, type) {
+const move = (boardIndex, type) => {
   if (gameButtonStart === true) {
     const $boardItem = $boardList[boardIndex]
 
@@ -255,17 +254,17 @@ function move(boardIndex, type) {
   }
 }
 
-function addPoint(winner) {
+const addPoint = (winner) => {
   if (winner === 'X') scorePlayer1++
   if (winner === 'O') scorePlayer2++
 }
 
-function printScore() {
+const printScore = () => {
   $score1.innerHTML = scorePlayer1 < 10 ? '0' + scorePlayer1 : scorePlayer1
   $score2.innerHTML = scorePlayer2 < 10 ? '0' + scorePlayer2 : scorePlayer2
 }
 
-function addEventListener() {
+const addEventListener = () => {
   for (let index = 0; index < $boardList.length; index++) {
     const $boardItem = $boardList[index]
 
@@ -277,26 +276,26 @@ function addEventListener() {
 
 addEventListener()
 
-$switcherBOT.addEventListener('click', function () {
+$switcherBOT.addEventListener('click', () => {
   $switcherBOT.classList.toggle('active')
   botActive = !botActive
   $playerField2.value = botActive ? 'BOT' : ''
   $playerField2.disabled = !$playerField2.disabled
 })
 
-$switcherBestOf.addEventListener('click', function () {
+$switcherBestOf.addEventListener('click', () => {
   $switcherBestOf.classList.toggle('active')
   toggleBestOf()
 })
 
-$startButton.addEventListener('click', function () {
+$startButton.addEventListener('click', () => {
   $startButton.classList.toggle('start-active')
 
   gameButtonStart = gameButtonStart === false ? true : false
 
 })
 
-$restartButton.addEventListener('click', function () {
+$restartButton.addEventListener('click', () => {
   resetHistoryList()
   resetScoreboard()
   resetBattlefield()
