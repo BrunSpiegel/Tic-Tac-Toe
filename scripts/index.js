@@ -97,21 +97,21 @@ const getSenery = () => {
   return scenery
 }
 
-const verifyBestOf = () => {
+const verifyBestOf = (winner) => {
   if (scorePlayer1 === 2 && bestOf === 3) {
-    return 'X'
+    return $winnerName.textContent = `${winner} Venceu!!` 
   }
 
   if (scorePlayer1 === 3 && bestOf === 5) {
-    return 'X'
+    return `${winner} Venceu!!`
   }
 
   if (scorePlayer2 === 2 && bestOf === 3) {
-    return 'O'
+    return `${winner} Venceu!!`
   }
 
   if (scorePlayer1 === 3 && bestOf === 5) {
-    return 'O'
+    return `${winner} Venceu!!`
   }
 }
 
@@ -241,7 +241,7 @@ const move = (boardIndex, type) => {
       }, 1000)
     }
 
-    const bestOfResult = verifyBestOf()
+    const bestOfResult = verifyBestOf(playerName)
 
     printMoveList(currentMove, playerName, boardIndex)
     toggleMove()
@@ -251,7 +251,7 @@ const move = (boardIndex, type) => {
       resetScoreboard()
       scorePlayer1 = 0
       scorePlayer2 = 0
-      alert(bestOfResult)
+      bestOfResult 
     }
   }
 }
