@@ -177,9 +177,9 @@ const resetScoreboard = () => {
 }
 
 const resetBattlefield = () => {
-  for (const $boardItem of $boardList) {
+  $boardList.forEach(($boardItem) => {
     $boardItem.innerHTML = ''
-  }
+  })
 }
 
 const toggleBestOf = () => {
@@ -268,7 +268,7 @@ const addEventListener = () => {
   for (let index = 0; index < $boardList.length; index++) {
     const $boardItem = $boardList[index]
 
-    $boardItem.addEventListener('click', function () {
+    $boardItem.addEventListener('click', () => {
       move(index, 'user')
     })
   }
